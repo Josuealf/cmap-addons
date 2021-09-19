@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="oficios_enviados_form_view">
+            <field name="name">oficios.enviados.form</field>
+            <field name="model">control_documentos.oficios_enviados</field>
+            <field name="arch" type="xml">
+                <form string="Oficios Enviados Form">
+                    <header>
+                        <button name="set_cancelado_progressbar" string="Cancelar" type="object" 
+                                class="oe_highlight" attrs="{'invisible': ['!', ('status', '=', 'en_espera')]}"/>
+                        <button name="set_enviado_progressbar" string="Enviar" type="object" 
+                                class="oe_highlight" attrs="{'invisible': ['!', ('status', '=', 'en_espera')]}"/>
+                        <button name="set_recibido_progressbar" string="Marcar como recibido" type="object" 
+                                class="oe_highlight" attrs="{'invisible': ['!', ('status', '=', 'enviado')]}"/>
+                        <field name="status" widget="statusbar" statusbar_visible="en_espera,enviado,recibido"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="dependencia_id"/>
+                                <field name="correlativo"/>
+                                <field name="destinatario_id"/>
+                                <field name="asunto"/>
+                                <field name="fecha"/>
+                            </group>
+                            <group>
+                                <field name="archivo_img"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit tree view definition -->
+        <record model="ir.ui.view" id="oficios_enviados_tree_view">
+            <field name="name">oficios.enviados.list</field>
+            <field name="model">control_documentos.oficios_enviados</field>
+            <field name="arch" type="xml">
+                <tree string="Oficios Enviados Tree">
+                    <field name="dependencia_id"/>
+                    <field name="correlativo"/>
+                    <field name="destinatario_id"/>
+                    <field name="asunto"/>
+                    <field name="fecha"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- explicit search view definition -->
+        <record model="ir.ui.view" id="oficios_enviados_search_view">
+            <field name="name">oficios.enviados.search</field>
+            <field name="model">control_documentos.oficios_enviados</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="dependencia_id"/>
+                    <filter name="only_dc" string="DC"
+                            domain="[('dependencia_id', '=', 'Despacho del Contralor')]"/>
+                    <filter name="only_das" string="DAS"
+                            domain="[('dependencia_id', '=', 'Direccion de Administracion y Servicios')]"/>
+                    <filter name="only_drh" string="DRH"
+                            domain="[('dependencia_id', '=', 'Direccion de Recursos Humanos')]"/>
+                    <filter name="only_dcp" string="DCP"
+                            domain="[('dependencia_id', '=', 'Direccion de Control Posterior')]"/>
+                    <field name="correlativo"/>
+                    <field name="asunto" filter_domain="[('asunto', 'ilike', self)]"/>
+                    <field name="fecha"/>
+                    <field name="status"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- explicit calendar view definition -->
+        <record model="ir.ui.view" id="oficios_enviados_calendar_view">
+            <field name="name">oficios.enviados.calendar</field>
+            <field name="model">control_documentos.oficios_enviados</field>
+            <field name="arch" type="xml">
+                <calendar string="Oficios Enviados Calendar" date_start="fecha">
+                    <field name="dependencia_id"/>
+                    <field name="correlativo"/>
+                    <field name="destinatario_id"/>
+                    <field name="status"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="oficios_enviados_action_window">
+            <field name="name">Oficios Enviados</field>
+            <field name="res_model">control_documentos.oficios_enviados</field>
+            <field name="view_mode">tree,form,search,calendar</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Control Documentos" id="control_documentos_menu_root"/>
+
+        <!-- menu categories -->
+        <menuitem name="Oficios" id="control_documentos_oficios" parent="control_documentos_menu_root"/>
+
+        <!-- sub-menu categories -->
+        <menuitem name="Enviados" id="control_documentos_oficios_enviados" parent="control_documentos_oficios"
+                  action="oficios_enviados_action_window"/>
+
+    </data>
+</odoo>

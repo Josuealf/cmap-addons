@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="department_form_view">
+            <field name="name">hr.department.form</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='manager_id']" position="after">
+                    <field name="acronyms"/>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="total_oficios_enviados"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- explicit tree view definition -->
+        <record model="ir.ui.view" id="department_tree_view">
+            <field name="name">hr.department.tree</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="acronyms"/>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="total_oficios_enviados"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- explicit graph view definition -->
+        <record model="ir.ui.view" id="department_graph_view">
+            <field name="name">hr.department.graph</field>
+            <field name="model">hr.department</field>
+            <field name="arch" type="xml">
+                <graph string="Dependencias Graph">
+                    <field name="acronyms"/>
+                    <field name="total_oficios_enviados" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="department_action_window">
+            <field name="name">Dependencias</field>
+            <field name="res_model">hr.department</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <!-- menu categories -->
+        <menuitem id="configuration_menu" name="Configuration"
+                  parent="control_documentos_menu_root"/>
+
+        <menuitem name="Dependencias" id="control_documentos_dependencias" parent="configuration_menu"
+                  action="department_action_window"/>
+
+    </data>
+</odoo>

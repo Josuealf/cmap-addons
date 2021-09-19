@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="oficios_recibidos_form_view">
+            <field name="name">oficios.recibidos.form</field>
+            <field name="model">control_documentos.oficios_recibidos</field>
+            <field name="arch" type="xml">
+                <form string="Oficios Recibidos Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="correlativo"/>
+                                <field name="remitente_id"/>
+                                <field name="asunto"/>
+                                <field name="fecha"/>
+                            </group>
+                            <group>
+                                <field name="fechahora_recibo"/>
+                                <field name="archivo_img"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- explicit tree view definition -->
+        <record model="ir.ui.view" id="oficios_recibidos_tree_view">
+            <field name="name">oficios.recibidos.list</field>
+            <field name="model">control_documentos.oficios_recibidos</field>
+            <field name="arch" type="xml">
+                <tree string="Oficios Recibidos Tree">
+                    <field name="correlativo"/>
+                    <field name="remitente_id"/>
+                    <field name="asunto"/>
+                    <field name="fecha"/>
+                    <field name="fechahora_recibo"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="oficios_recibidos_action_window">
+            <field name="name">Oficios Recibidos</field>
+            <field name="res_model">control_documentos.oficios_recibidos</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- sub-menu categories -->
+        <menuitem name="Recibidos" id="control_documentos_oficios_recibidos" parent="control_documentos_oficios"
+                  action="oficios_recibidos_action_window"/>
+
+    </data>
+</odoo>
