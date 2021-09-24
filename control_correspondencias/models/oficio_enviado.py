@@ -3,23 +3,36 @@
 from odoo import models, fields, api
 
 
-class OficiosEnviados(models.Model):
-    _name = 'control_documentos.oficios_enviados'
-    _description = 'Oficios Enviados'
+class OficioEnviado(models.Model):
+    _name = 'cmap.oficio_enviado'
+    _description = 'Oficio Enviado'
 
+    id_id = fields.Integer(
+        string="ID", 
+        index=True,
+        required=True
+    )
     dependencia_id = fields.Many2one(
         'hr.department',
+        ondelete='cascade',
         string="Dependencia",
+        index=True,
         help="Seleccione la dependencia que suscribe el oficio.",
         required=True
     )
     correlativo = fields.Char(
         string="N° de correlativo", 
-        required=True, 
-        index=True
+        required=True
     )
-    destinatario_id = fields.Many2one('res.partner', string="Dirigido", required=True)
-    asunto = fields.Text(string="Asunto", help="Colocar el motivo o descripcion resaltante del documento.")
+    destinatario_id = fields.Many2one(
+    	'res.partner', 
+    	string="Dirigido", 
+    	required=True
+    )
+    asunto = fields.Text(
+    	string="Asunto", 
+    	help="Colocar el motivo o descripcion resaltante del documento."
+    )
     fecha = fields.Date(string="Fecha")
     status = fields.Selection(
     	[
@@ -44,3 +57,10 @@ class OficiosEnviados(models.Model):
     def set_recibido_progressbar(self):
         for self in self:
     	    self.status = 'recibido'
+
+    _sql_constraints = [
+        ('id_unique',
+         'UNIQUE(id_id)',
+         "The ID must be unique"),
+    ]
+

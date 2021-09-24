@@ -16,5 +16,5 @@ class Department(models.Model):
 
     def _get_total_oficios_enviados(self):
     	for department in self:
-    		department.total_oficios_enviados = self.env["control_documentos.oficios_enviados"].search_count(
+    		department.total_oficios_enviados = self.env["cmap.oficio_enviado"].search_count(
     			[("dependencia_id", "=", department.id)])

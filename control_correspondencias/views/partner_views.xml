@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+        <!-- explicit form view definition -->
+        <record model="ir.ui.view" id="partner_form_view">
+            <field name="name">partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Oficios Recibidos">
+                        <group>
+                            <field name="oficio_enviado_ids"/>
+                        </group>
+                    </page>
+                    <page string="Oficios Enviados">
+                        <group>
+                            <field name="oficio_recibido_ids"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="partner_action_window">
+            <field name="name">Contacts</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- menu categories -->
+        <menuitem id="configuration_menu" name="Configuration"
+                  parent="control_correspondencias_menu_root"/>
+
+        <menuitem id="contact_menu" name="Contacts"
+                  parent="configuration_menu" action="partner_action_window"/>
+
+    </data>
+</odoo>

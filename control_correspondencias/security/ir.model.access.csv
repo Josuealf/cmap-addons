@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cmap_oficio_enviado,cmap.oficio_enviado,model_cmap_oficio_enviado,base.group_user,1,1,1,1
+access_cmap_oficio_recibido,cmap.oficio_recibido,model_cmap_oficio_recibido,base.group_user,1,1,1,1

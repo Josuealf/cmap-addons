@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Registro/Control de Documentos",
+    'name': "Registro/Control de Correspondencias",
 
     'summary': """
-        Registro y control de documentos de la CMAP
+        Registro y control de correspondencias de la CMAP
     """,
     'description': """
         Desarrollado con la finalidad de poder llevar el registro y control
-        de todos los documentos fisicos que se manejan en la Contraloria
+        de todas las correspondencias fisicas que se manejan en la Contraloria
         del Municipio "Ambrosio Plaza"
     """,
 
@@ -21,14 +21,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','contacts', 'hr'],
+    'depends': ['base','hr'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/oficios_enviados_views.xml',
-        'views/oficios_recibidos_views.xml',
-        'views/hr_department_views.xml',
+        'views/oficio_enviado_views.xml',
+        'views/oficio_recibido_views.xml',
+        'views/partner_views.xml',
+        'views/department_views.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode

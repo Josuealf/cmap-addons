@@ -4,14 +4,15 @@
     <data>
 
         <!-- explicit form view definition -->
-        <record model="ir.ui.view" id="oficios_recibidos_form_view">
-            <field name="name">oficios.recibidos.form</field>
-            <field name="model">control_documentos.oficios_recibidos</field>
+        <record model="ir.ui.view" id="oficio_recibido_form_view">
+            <field name="name">oficio_recibido.form</field>
+            <field name="model">cmap.oficio_recibido</field>
             <field name="arch" type="xml">
                 <form string="Oficios Recibidos Form">
                     <sheet>
                         <group>
                             <group>
+                                <field name="id_id"/>
                                 <field name="correlativo"/>
                                 <field name="remitente_id"/>
                                 <field name="asunto"/>
@@ -28,11 +29,12 @@
         </record>
 
         <!-- explicit tree view definition -->
-        <record model="ir.ui.view" id="oficios_recibidos_tree_view">
-            <field name="name">oficios.recibidos.list</field>
-            <field name="model">control_documentos.oficios_recibidos</field>
+        <record model="ir.ui.view" id="oficio_recibido_tree_view">
+            <field name="name">oficio_recibido.list</field>
+            <field name="model">cmap.oficio_recibido</field>
             <field name="arch" type="xml">
                 <tree string="Oficios Recibidos Tree">
+                    <field name="id_id"/>
                     <field name="correlativo"/>
                     <field name="remitente_id"/>
                     <field name="asunto"/>
@@ -43,15 +45,15 @@
         </record>
 
         <!-- actions opening views on models -->
-        <record model="ir.actions.act_window" id="oficios_recibidos_action_window">
+        <record model="ir.actions.act_window" id="oficio_recibido_action_window">
             <field name="name">Oficios Recibidos</field>
-            <field name="res_model">control_documentos.oficios_recibidos</field>
+            <field name="res_model">cmap.oficio_recibido</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <!-- sub-menu categories -->
-        <menuitem name="Recibidos" id="control_documentos_oficios_recibidos" parent="control_documentos_oficios"
-                  action="oficios_recibidos_action_window"/>
+        <menuitem name="Recibidos" id="control_correspondencias_oficio_recibido" parent="control_correspondencias_oficios"
+                  action="oficio_recibido_action_window"/>
 
     </data>
 </odoo>

@@ -4,9 +4,9 @@
     <data>
 
         <!-- explicit form view definition -->
-        <record model="ir.ui.view" id="oficios_enviados_form_view">
-            <field name="name">oficios.enviados.form</field>
-            <field name="model">control_documentos.oficios_enviados</field>
+        <record model="ir.ui.view" id="oficio_enviado_form_view">
+            <field name="name">oficio_enviado.form</field>
+            <field name="model">cmap.oficio_enviado</field>
             <field name="arch" type="xml">
                 <form string="Oficios Enviados Form">
                     <header>
@@ -21,13 +21,14 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="id_id"/>
                                 <field name="dependencia_id"/>
                                 <field name="correlativo"/>
                                 <field name="destinatario_id"/>
                                 <field name="asunto"/>
-                                <field name="fecha"/>
                             </group>
                             <group>
+                                <field name="fecha"/>
                                 <field name="archivo_img"/>
                             </group>
                         </group>
@@ -37,11 +38,12 @@
         </record>
 
         <!-- explicit tree view definition -->
-        <record model="ir.ui.view" id="oficios_enviados_tree_view">
-            <field name="name">oficios.enviados.list</field>
-            <field name="model">control_documentos.oficios_enviados</field>
+        <record model="ir.ui.view" id="oficio_enviado_tree_view">
+            <field name="name">oficio_enviado.list</field>
+            <field name="model">cmap.oficio_enviado</field>
             <field name="arch" type="xml">
                 <tree string="Oficios Enviados Tree">
+                    <field name="id_id"/>
                     <field name="dependencia_id"/>
                     <field name="correlativo"/>
                     <field name="destinatario_id"/>
@@ -53,9 +55,9 @@
         </record>
 
         <!-- explicit search view definition -->
-        <record model="ir.ui.view" id="oficios_enviados_search_view">
-            <field name="name">oficios.enviados.search</field>
-            <field name="model">control_documentos.oficios_enviados</field>
+        <record model="ir.ui.view" id="oficio_enviado_search_view">
+            <field name="name">oficio_enviado.search</field>
+            <field name="model">cmap.oficio_enviado</field>
             <field name="arch" type="xml">
                 <search>
                     <field name="dependencia_id"/>
@@ -71,16 +73,21 @@
                     <field name="asunto" filter_domain="[('asunto', 'ilike', self)]"/>
                     <field name="fecha"/>
                     <field name="status"/>
+                    <group string="Group By">
+                        <filter name="by_id" string="ID"
+                                context="{'group_by': 'id_id'}"/>
+                    </group>
                 </search>
             </field>
         </record>
 
         <!-- explicit calendar view definition -->
-        <record model="ir.ui.view" id="oficios_enviados_calendar_view">
-            <field name="name">oficios.enviados.calendar</field>
-            <field name="model">control_documentos.oficios_enviados</field>
+        <record model="ir.ui.view" id="oficio_enviado_calendar_view">
+            <field name="name">oficio_enviado.calendar</field>
+            <field name="model">cmap.oficio_enviado</field>
             <field name="arch" type="xml">
                 <calendar string="Oficios Enviados Calendar" date_start="fecha">
+                    <field name="id_id"/>
                     <field name="dependencia_id"/>
                     <field name="correlativo"/>
                     <field name="destinatario_id"/>
@@ -90,21 +97,22 @@
         </record>
 
         <!-- actions opening views on models -->
-        <record model="ir.actions.act_window" id="oficios_enviados_action_window">
+        <record model="ir.actions.act_window" id="oficio_enviado_action_window">
             <field name="name">Oficios Enviados</field>
-            <field name="res_model">control_documentos.oficios_enviados</field>
+            <field name="res_model">cmap.oficio_enviado</field>
             <field name="view_mode">tree,form,search,calendar</field>
+            <field name="context" eval="{'search_default_by_id': 1}"/>
         </record>
 
         <!-- Top menu item -->
-        <menuitem name="Control Documentos" id="control_documentos_menu_root"/>
+        <menuitem name="Control Correspondencias" id="control_correspondencias_menu_root"/>
 
         <!-- menu categories -->
-        <menuitem name="Oficios" id="control_documentos_oficios" parent="control_documentos_menu_root"/>
+        <menuitem name="Oficios" id="control_correspondencias_oficios" parent="control_correspondencias_menu_root"/>
 
         <!-- sub-menu categories -->
-        <menuitem name="Enviados" id="control_documentos_oficios_enviados" parent="control_documentos_oficios"
-                  action="oficios_enviados_action_window"/>
+        <menuitem name="Enviados" id="control_correspondencias_oficio_enviado" parent="control_correspondencias_oficios"
+                  action="oficio_enviado_action_window"/>
 
     </data>
 </odoo>

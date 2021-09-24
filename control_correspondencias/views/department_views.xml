@@ -27,6 +27,9 @@
                 <xpath expr="//field[@name='display_name']" position="after">
                     <field name="acronyms"/>
                 </xpath>
+                <xpath expr="//field[@name='display_name']" position="replace">
+                    <field name="name"/>
+                </xpath>
                 <xpath expr="//field[@name='parent_id']" position="after">
                     <field name="total_oficios_enviados"/>
                 </xpath>
@@ -47,17 +50,17 @@
 
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="department_action_window">
-            <field name="name">Dependencias</field>
+            <field name="name">Departments</field>
             <field name="res_model">hr.department</field>
             <field name="view_mode">tree,form,graph</field>
         </record>
 
         <!-- menu categories -->
         <menuitem id="configuration_menu" name="Configuration"
-                  parent="control_documentos_menu_root"/>
+                  parent="control_correspondencias_menu_root"/>
 
-        <menuitem name="Dependencias" id="control_documentos_dependencias" parent="configuration_menu"
-                  action="department_action_window"/>
+        <menuitem id="department_menu" name="Departments" 
+                  parent="configuration_menu" action="department_action_window"/>
 
     </data>
 </odoo>
